@@ -11,7 +11,7 @@ function Categories() {
                 {categories.map((category, index) => (
                     <div key={index} className='group cursor-pointer py-5 px-3 gap-2 rounded-lg flex flex-col justify-center items-center' style={{ backgroundColor: category.bgColor }}
                         onClick={() => {
-                            navigate(`/products/${category.path.toLowerCase()}`);
+                            navigate(`/allProducts/${category.path.toLowerCase()}`);
                             scrollTo(0, 0)
                         }}>
                         <img className='group-hover:scale-108 transition max-w-28' src={category.image} alt="" />
