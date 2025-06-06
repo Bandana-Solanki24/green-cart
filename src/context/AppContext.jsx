@@ -27,6 +27,29 @@ export const AppContextProvider = ({ children }) => {
 
     }
 
+    //get items count
+
+    const getCartCount = () => {
+        let totalCount = 0;
+        for (const item in cartItems) {
+            totalCount += cartItems[item]
+        }
+        return totalCount
+    }
+    // get cart total amount 
+    const getCartAmount = () => {
+        let totalAmount = 0;
+        for (const item in cartItems) {
+            let itemInfo = products.find(product => product._id === item);
+            if (cartItems[item] > 0) {
+                totalAmount += itemInfo.offerPrice * cartItems[item]
+
+            }
+
+        }
+        return Math.floor(totalAmount * 100) / 100
+    }
+
     // add to cart
     const addToCart = async (itemId) => {
         let cartData = structuredClone(cartItems);
@@ -50,8 +73,6 @@ export const AppContextProvider = ({ children }) => {
 
 
     }
-
-
     // remove product from cart 
 
     const removeFromCart = (itemId) => {
@@ -71,7 +92,7 @@ export const AppContextProvider = ({ children }) => {
 
     console.log(dummyProducts)
 
-    const value = { currency, navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, addToCart, updateCartItems, removeFromCart, cartItems, searchQuery, setSearchQuery };
+    const value = { currency, navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, addToCart, updateCartItems, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartAmount, getCartCount };
     return (
         <AppContext.Provider value={value}>
             {children}
